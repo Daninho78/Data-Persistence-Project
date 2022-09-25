@@ -59,6 +59,10 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
@@ -72,5 +76,13 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+
+        if(m_Points>SaveManager.Instance.bestScore)
+        {
+            SaveManager.Instance.bestScore = m_Points;
+            SaveManager.Instance.bestScoreName = SaveManager.Instance.userName;
+        }
+        SaveManager.Instance.SaveBestScore();
+
     }
 }
